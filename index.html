@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>To Do List</title>
+        <style>
+            html {
+                color: #b3b3f1;
+                background-color: #141b41;
+            }
+
+            body {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                margin: 0;
+            }
+
+            form {
+                padding: 2.5rem;
+                color: #141b41;
+                float: right;                    
+            }
+
+            section {
+                padding: 2rem;
+                background-color: #b3b3f1;
+                color: #141b41;
+                max-width: 80rem;
+                margin: 0 auto;
+                display: flex;
+            }
+
+            fieldset {
+                padding: 1rem;
+                background-color: plum;
+                border: none;
+            }
+
+            h1 {
+                font-size: 7rem;
+                color: plum;
+            }
+
+            header {
+                text-align: center;
+            }
+
+            footer {
+                width: 100%;
+                background-color: plum;
+                height: 20rem;
+                margin-top: auto;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            label {
+                display: block;
+                margin: 0.5rem 0;
+            }
+
+            .output {
+                padding: 6rem 3rem 6rem 3rem;
+                background-color: plum;
+                width: 20rem;
+            }
+
+            h2 {
+                font-size: 4rem;
+            }
+
+            li {
+                font-size: 2rem;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            <h1>aman list</h1>
+        </header>
+
+        <section>
+            <article>
+                <form action="" id="form">
+                    <p style="font-size: 2rem;">a simple to-do list app for all audiences!</p>                
+                    <fieldset>
+                        <label for="listname">name your list</label>
+                        <input type="text" id="listname" name="nameyourlist">
+                    </fieldset>
+                    <br>
+                    <fieldset>
+                        <label for="listinput0">task</label>
+                        <input type="text" id="listinput0" name="listinput0">
+                        <label for="listinput1">task</label>
+                        <input type="text" id="listinput1" name="listinput1">
+                        <label for="listinput2">task</label>
+                        <input type="text" id="listinput2" name="listinput2">
+                        <input type="submit" id="submit" name="submitbutton" value="Submit">
+                    </fieldset>
+                </form>
+            </article>                
+            <article class="output">
+                <h2 id="listHeader"></h2>
+                <ul id="taskList">
+                    <!-- list items will be added here -->
+                </ul>            
+            </article>                                
+        </section>
+        
+        <footer>
+            <p>&copy; Amanda Ernar 2024</p>
+        </footer>
+
+        <script>
+            document.getElementById("form").addEventListener("submit", function(event) {
+                event.preventDefault();
+
+                let listItems = [];
+                let listName = document.getElementById("listname").value.trim();
+
+                // updates the header
+                let listHeader = document.getElementById("listHeader");
+                if (listName) {
+                    listHeader.textContent = listName;
+                    listItems.push(listName);
+                } else {
+                    listHeader.textContent = "";
+                }
+                
+                // gets items
+                for (let i = 0; i < 3; i++) {
+                    let item = document.getElementById("listinput" + i).value.trim();
+                    if (item) {
+                        listItems.push(item);
+                    }
+                }
+                
+                // pushes
+                if (listItems.length > 1) {
+                    let ul = document.getElementById("taskList");
+                    ul.innerHTML = '';
+
+                    listItems.slice(1).forEach(function(item) {
+                        let li = document.createElement("li");
+                        li.textContent = item;
+                        ul.appendChild(li);
+                    });
+                } else {
+                    alert("please enter at least one task.");
+                }
+            });
+        </script>
+    </body>
+</html>
+
